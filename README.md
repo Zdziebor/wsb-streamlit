@@ -19,13 +19,13 @@ Wbudowane filtry (seria, lata, typ, wyszukiwarka nazw) przeliczają na żywo wsz
 
 ## 🗂️ Skąd są dane
 
-Dane pochodzą z oficjalnego repozytorium danych API [pokemontcg.io](https://pokemontcg.io) —
+Dane pochodzą z oficjalnego repozytorium danych API [pokemontcg.io](https://pokemontcg.io) -
 [`PokemonTCG/pokemon-tcg-data`](https://github.com/PokemonTCG/pokemon-tcg-data) (licencja MIT).
 
 Skrypt `pobierz_dane.py` ściąga całe repo jako archiwum `.tar.gz`, spłaszcza
 zagnieżdżone JSON-y (karty + sety) do jednej tabeli i zapisuje snapshot w
 `dane/karty_surowe.csv` (~2,4 MB). W repo trzymam snapshot zamiast odpytywać
-API na żywo — dzięki temu aplikacja startuje szybko i zawsze działa tak samo,
+API na żywo - dzięki temu aplikacja startuje szybko i zawsze działa tak samo,
 niezależnie od dostępności API. Odświeżenie danych to jedno polecenie:
 
 ```bash
@@ -46,14 +46,14 @@ python pobierz_dane.py
 
 ## 🧹 Czyszczenie i przygotowanie danych
 
-Surowy CSV celowo zostaje „brudny" — pełne czyszczenie dzieje się w
+Surowy CSV celowo zostaje „brudny" - pełne czyszczenie dzieje się w
 `przygotowanie.py`, żeby cały krok był widoczny w kodzie:
 
 * konwersja daty wydania (string `1999/01/09` → `datetime`) + kolumna pochodna `rok`,
 * `hp` → liczba; braki **zostają**, bo niosą informację (karty Trainer i Energy
-  z definicji nie mają HP — to nie jest błąd danych),
+  z definicji nie mają HP - to nie jest błąd danych),
 * brak rzadkości → jawna kategoria `"Brak danych"` (stare sety i promosy),
-* obrażenia ataków to stringi typu `"120+"`, `"30×"` — regex wyciąga liczby
+* obrażenia ataków to stringi typu `"120+"`, `"30×"` - regex wyciąga liczby
   i tworzy kolumnę pochodną `max_obrazenia`,
 * z listy typów (`Fire|Water`) brany jest typ główny,
 * deduplikacja
